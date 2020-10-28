@@ -9,8 +9,8 @@ class Server:
     #seats spceific customer in an available table
     #def seat_customer(Table t, Customer s):
 
-    def clear_table(table):
-        table.clear
+    def clear_table(self, table):
+        table.clear()
 
 
     def set_name(self, name):
