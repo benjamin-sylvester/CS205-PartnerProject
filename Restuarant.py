@@ -1,35 +1,24 @@
 
-"""
-Server:
-	class variables:
-        name: string
-        is_busy: bool
-	member functions:
-        seat_customer(Table t, Customer s)
-        clear_table(Table t)
-        setName(string name)
-        getName()
-"""
 
-"""
-1.) print a welcome message to the customer
+def welcome_menu():
+    print("Welcome to Ben and Jimmy's Shrimp Shack by the Sea")
+    print("Please fill in the following information, and we will have you seated right away")
+    party_name = input("What is the name of your party: ")
+    party_size = input("How many people are in your party: ")
+    time = input("Would you like to be seated now (press 1) or later (press2)")
+    print("Please wait while we check our availability ")
 
-2.) we get the size of party and any location preference
 
-3.) initialize a customer object
 
-4.) initialze a list of servers and tables
 
-5.) loop through the list of servers and find someone who isnt busy
 
-6.) have the server check through the list of tables and see if there are any matches for the party
-
-7.)
-
-"""
 
 def main():
+    welcome_menu()
 
-    print("Howdy! Welcome to Jimmy&Ben's Sea Shack by the Shore, we're happy to have you \n")
+main()
 
-    num_people =
+
+
+
+

@@ -12,4 +12,4 @@ class Seating:
     #Function will be called when there is...
     # A Customer waiting
     # A table that fits the party
-    #There is a party/customer waiting 
+    #There is a party/customer waiting
