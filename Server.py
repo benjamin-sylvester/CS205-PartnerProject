@@ -15,6 +15,8 @@ class Server:
     def clear_table(self, table):
         table.clear()
 
+    def get_is_busy(self):
+        return self.is_busy
 
     def set_name(self, name):
         self.name = name

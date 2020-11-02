@@ -4,8 +4,24 @@ from Server import Server
 from Restuarant import Restuarant
 from Customer import Customer
 
-def welcome_menu():
+def opening_menu():
+    choices = [1,2,3,4,5]
     print("Welcome to Ben and Jimmy's Shrimp Shack by the Sea")
+    choice = int(input("Please select an option from the following list\n"
+                   "Enter '1' to be seated\n"
+                   "Enter '2' to order\n"
+                   "Enter '3' to get the check\n"
+                   "Enter '4' to leave the restaurant\n"
+                   "Enter '5' to exit program\n"
+                   "Enter your choice: "))
+
+    while choice not in choices:
+        print("Invalid input, please enter 1, 2, 3, 4 or 5")
+
+    return choice
+
+def seating_menu():
+
     print("Please fill in the following information, and we will have you seated right away")
     party_name = input("What is the name of your party: ")
     party_size = int(input("How many people are in your party: "))
@@ -44,10 +60,10 @@ def check_availability(customer1, restuarant):
 
     for table in all_tables:
 
-        if table.get_is_free() and customer1.get_location_pref() == table.get_location() and table.get_num_seats() == customer1.get_party_size():
-            print("FOUND")
+        if table.get_is_free() and customer1.get_location_pref() == table.get_location() and table.get_num_seats() >= customer1.get_party_size():
+            #print("FOUND")
             table_found = True
-            table.show_table_data()
+            #table.show_table_data()
             valid_table = table
 
     if not table_found:
@@ -62,30 +78,57 @@ def check_availability(customer1, restuarant):
 
 
 def main():
+    seated_customers = []
+    waiting_customers = []
 
-
+    list_of_seatings = []
     theRestuarant = initialize_restuarant()
 
+    choice = opening_menu()
 
-    customer_name, customer_size, location = welcome_menu()
+    while choice != 5:
+        # if customer wants to be seated
+        if choice == 1:
+            customer_name, customer_size, location = seating_menu()
+            customer1 = Customer(customer_name, customer_size, location)
 
-    customer1 = Customer(customer_name, customer_size, location)
+            customer_seated, open_table = check_availability(customer1, theRestuarant)
 
-    customer_seated, open_table = check_availability(customer1, theRestuarant)
+            # if we have a table open, need to have a server seat the customer
+            seated = False
+            if customer_seated:
+                for server in theRestuarant.get_servers():
+                    if not server.is_busy:
+                        print("Our server " + server.get_name() + " is ready to seat you now")
+                        seating = Seating(server, customer1, open_table)
+                        seating.seat()
+                        seating.show_seating()
+                        seated_customers.append(customer1.get_party_name())
+                        list_of_seatings.append(seating)
+                        seated = True
+                        break
+                    if server.is_busy and not seated:
+                        print("Please continue waiting. We have no servers available to seat you at this moment. You should be seated briefly")
 
-    # if we have a table open, need to have a server seat the customer
-    seated = False
-    if customer_seated:
-        for server in theRestuarant.get_servers():
-            if not server.is_busy:
-                print("Our server " + server.get_name() + " will be seating you shortly")
-                seating = Seating(server, customer1, open_table)
-                seating.seat()
-                seating.show_seating()
-                seated = True
-                break
-            if server.is_busy and not seated:
-                print("Please continue waiting. We have no servers available to seat you at this moment. You should be seated briefly")
+        if choice == 2:
+            name_customer = input("What is the name of your party so we can send of your server: ")
+            if name_customer in seated_customers:
+                for seating in list_of_seatings:
+                    print("SEATED CUSTOMER: " + seating.get_customer_name())
+                    if seating.get_customer_name() == name_customer:
+                        print("Your sever, " + seating.get_server_name() + " will be over to take your order soon. Thanks!")
+
+        if choice == 3:
+            name_customer = input("What is the name of your party so we can send of your server: ")
+            if name_customer in seated_customers:
+                for seating in list_of_seatings:
+                    print("SEATED CUSTOMER: " + seating.get_customer_name())
+                    if seating.get_customer_name() == name_customer:
+                        print("Your sever, " + seating.get_server_name() + " will be over with your check shortly. Thanks!")
+
+        choice = opening_menu()
+
+
 
     
 

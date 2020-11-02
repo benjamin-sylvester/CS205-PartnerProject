@@ -21,6 +21,16 @@ class Seating:
         outputString += self.server.get_name() + " at a " + str(self.table.get_num_seats()) + " person table"
         print(outputString)
 
+
+    def get_server_name(self):
+        return self.server.get_name()
+
+
+    def get_customer_name(self):
+        return self.customer.get_party_name()
+
+    def get_table(self):
+        return self.table
     #Function will be called when there is...
     # A Customer waiting
     # A table that fits the party
