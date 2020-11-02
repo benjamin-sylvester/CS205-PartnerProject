@@ -18,3 +18,7 @@ class Table:
 
     def clear(self):
         self.is_free = True
+
+    def show_table_data(self):
+        outString = "Table data:\nNumber of Seats: " + str(self.get_num_seats()) + "\nLocation: " + self.get_location() + "\nIs free: " + str(self.get_is_free())
+        print(outString)

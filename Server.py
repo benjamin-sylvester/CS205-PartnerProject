@@ -9,6 +9,9 @@ class Server:
     #seats spceific customer in an available table
     #def seat_customer(Table t, Customer s):
 
+    def seat_customer(self):
+        self.is_busy = True
+
     def clear_table(self, table):
         table.clear()
 

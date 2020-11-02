@@ -8,6 +8,8 @@ class Restuarant:
     def get_tables(self):
         return self.tables
 
+    def get_servers(self):
+        return self.servers
 
 
 
