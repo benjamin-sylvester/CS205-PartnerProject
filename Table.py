@@ -19,6 +19,12 @@ class Table:
     def clear(self):
         self.is_free = True
 
+    def set_num_seats(self, number_seats):
+        self.num_seats = number_seats
+
+    def set_location(self, new_location):
+        self.location = new_location
+
     def show_table_data(self):
         outString = "Table data:\nNumber of Seats: " + str(self.get_num_seats()) + "\nLocation: " + self.get_location() + "\nIs free: " + str(self.get_is_free())
         print(outString)

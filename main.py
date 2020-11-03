@@ -7,7 +7,7 @@ from Customer import Customer
 def opening_menu():
     choices = [1,2,3,4,5]
     print("Welcome to Ben and Jimmy's Shrimp Shack by the Sea")
-    choice = int(input("Please select an option from the following list\n"
+    choice = int(input("\nPlease select an option from the following list\n"
                    "Enter '1' to be seated\n"
                    "Enter '2' to order\n"
                    "Enter '3' to get the check\n"
@@ -25,7 +25,7 @@ def seating_menu():
     print("Please fill in the following information, and we will have you seated right away")
     party_name = input("What is the name of your party: ")
     party_size = int(input("How many people are in your party: "))
-    location = input("Do you have a location preference ('W' for window, 'B' for bar, 'O' for outside, 'I' for inside, 'N' for no preference")
+    location = input("Do you have a location preference ('W' for window, 'B' for bar, 'O' for outside, 'I' for inside, 'N' for no preference): ")
     print("Please wait while we check our availability ")
 
     return party_name, party_size, location
@@ -76,6 +76,12 @@ def check_availability(customer1, restuarant):
         print("The hostess will be seating you shortly")
         return True, valid_table
 
+def customer_leaves(restaurant, list_of_seatings):
+    all_tables = restaurant.get_tables()
+    for table in all_tables:
+        for seating in list_of_seatings:
+            if seating.get_table() == table:
+                table.clear()
 
 def main():
     seated_customers = []
@@ -100,7 +106,7 @@ def main():
                 for server in theRestuarant.get_servers():
                     if not server.is_busy:
                         print("Our server " + server.get_name() + " is ready to seat you now")
-                        seating = Seating(server, customer1, open_table)
+                        seating = Seating(server, customer1, open_table, customer1.get_location_pref())
                         seating.seat()
                         seating.show_seating()
                         seated_customers.append(customer1.get_party_name())
@@ -125,6 +131,20 @@ def main():
                     print("SEATED CUSTOMER: " + seating.get_customer_name())
                     if seating.get_customer_name() == name_customer:
                         print("Your sever, " + seating.get_server_name() + " will be over with your check shortly. Thanks!")
+        if choice == 4:
+            name_customer = input("What is the name of your party so we can send of your server: ")
+            if name_customer in seated_customers:
+                for seating in list_of_seatings:
+                    print("SEATED CUSTOMER: " + seating.get_customer_name())
+                    if seating.get_customer_name() == name_customer:
+                        for table in theRestuarant.get_tables():
+                            if table.get_location() == seating.get_location():
+                                table.clear()
+            else:
+                print("You do not have a table at this time. Therefore, you're unable to leave :)")
+
+
+        theRestuarant.show_tables()
 
         choice = opening_menu()
 

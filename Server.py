@@ -1,4 +1,3 @@
-import Table as table
 class Server:
 
     def __init__(self, name, is_busy):
@@ -6,17 +5,11 @@ class Server:
         self.is_busy = is_busy
 
 
-    #seats spceific customer in an available table
-    #def seat_customer(Table t, Customer s):
-
     def seat_customer(self):
         self.is_busy = True
 
     def clear_table(self, table):
         table.clear()
-
-    def get_is_busy(self):
-        return self.is_busy
 
     def set_name(self, name):
         self.name = name
@@ -24,5 +17,6 @@ class Server:
     def get_name(self):
         return self.name
 
-
+    def get_is_busy(self):
+        return self.is_busy
 

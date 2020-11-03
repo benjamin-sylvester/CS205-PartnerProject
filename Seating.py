@@ -4,10 +4,11 @@ from Customer import Customer
 
 class Seating:
 
-    def __init__(self, server , customer, table):
+    def __init__(self, server , customer, table, location):
         self.server = server
         self.customer = customer
         self.table = table
+        self.location = location
 
 
     def seat(self):
@@ -21,6 +22,8 @@ class Seating:
         outputString += self.server.get_name() + " at a " + str(self.table.get_num_seats()) + " person table"
         print(outputString)
 
+    def get_location(self):
+        return self.location
 
     def get_server_name(self):
         return self.server.get_name()
@@ -31,7 +34,16 @@ class Seating:
 
     def get_table(self):
         return self.table
-    #Function will be called when there is...
-    # A Customer waiting
-    # A table that fits the party
-    #There is a party/customer waiting
+
+
+    def set_server(self, server_obj):
+        self.server = server_obj
+
+    def set_table(self, table_obj):
+        self.table = table_obj
+
+    def set_customer(self, customer_obj):
+        self.customer = customer_obj
+
+    def set_location(self, location_str):
+        self.location = location_str
