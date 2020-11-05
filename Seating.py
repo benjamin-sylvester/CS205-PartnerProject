@@ -17,6 +17,9 @@ class Seating:
         self.customer.is_seated = True
         self.table.is_free = False
 
+    def clear(self):
+        self.table.is_free = True
+
     def show_seating(self):
         outputString = "Customer: " + self.customer.get_party_name() + " has been seated by "
         outputString += self.server.get_name() + " at a " + str(self.table.get_num_seats()) + " person table"
