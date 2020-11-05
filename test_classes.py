@@ -122,6 +122,27 @@ class TestingClasses(unittest.TestCase):
         restaurant1 = Restaurant(servers, tables)
         self.assertTrue(restaurant1.check_availability(self.customer_obj))
 
+    def test_check_availability_is_avail_bad(self):
+        server1 = Server("Lisa", False)
+        server2 = Server("Bob", False)
+        server3 = Server("Joe", False)
+        server4 = Server("Kate", False)
+        server5 = Server("John", False)
+        servers = [server1, server2, server3, server4, server5]
+        table1 = Table(4, "W", True)
+        table2 = Table(10, "B", True)
+        table3 = Table(4, "N", True)
+        table4 = Table(4, "N", True)
+        table5 = Table(2, "W", True)
+        table6 = Table(6, "N", True)
+        table7 = Table(3, "O", True)
+        table8 = Table(2, "N", True)
+        table9 = Table(12, "O", True)
+        table10 = Table(2, "N", True)
+        tables = [table1, table2, table3, table4, table5, table6, table7, table8, table9, table10]
+        restaurant1 = Restaurant(servers, tables)
+        self.assertTrue(restaurant1.check_availability_bad(self.customer_obj))
+
     def test_check_availability_is_not_avail(self):
         server1 = Server("Lisa", False)
         server2 = Server("Bob", False)

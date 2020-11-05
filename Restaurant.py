@@ -59,6 +59,25 @@ class Restaurant:
             #print("The hostess will be seating you shortly")
             return True, valid_table
 
+    def check_availability_bad(self, customer1):
+        all_tables = self.get_tables()
+        table_found = False
+
+        for table in all_tables:
+
+            if table.get_is_free() and customer1.get_location_pref() == table.get_location() and table.get_num_seats() >= customer1.get_party_size():
+                table_found = True
+                valid_table = table
+
+        if not table_found:
+            customer1.is_waiting = True
+            return True, None
+
+        else:
+            customer1.is_seated = True
+            return False
+
+
     def show_tables(self):
 
         for table in self.tables:
