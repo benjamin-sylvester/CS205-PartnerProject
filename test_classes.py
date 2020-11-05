@@ -100,7 +100,7 @@ class TestingClasses(unittest.TestCase):
         self.assertFalse(self.customer_obj.get_is_finsihed())
 
     #---------------------------------------------------------------------#
-    # TESTING FUNCTIONALITY OF OPERATING RESTURANT
+    # TESTING FUNCTIONALITY OF OPERATING RESTAURANT
     def test_check_availability_is_avail(self):
         server1 = Server("Lisa", False)
         server2 = Server("Bob", False)
@@ -162,7 +162,8 @@ class TestingClasses(unittest.TestCase):
         table10 = Table(2, "N", False)
         tables = [table1, table2, table3, table4, table5, table6, table7, table8, table9, table10]
         restaurant2 = Restaurant(servers, tables)
-        self.assertFalse(restaurant2.check_availability(self.customer_obj) == False , None)
+        valid = restaurant2.check_availability(self.customer_obj)[0]
+        self.assertFalse(valid)
 
     def test_finding_customer_is_seated(self):
         customer_found = False
